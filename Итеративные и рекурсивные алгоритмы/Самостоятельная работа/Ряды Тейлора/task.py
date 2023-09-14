@@ -1,5 +1,4 @@
 from typing import Union
-from itertools import count
 from math import factorial
 
 
@@ -13,4 +12,12 @@ def sinx(x: Union[int, float]) -> float:
     :param x: x значение в радианах
     :return: значение sin(x)
     """
-    ...  # TODO вычислить sin(x) с помощью разложения сумму бесконечного ряда
+    sin_x = 0
+    n = 0
+    while True:
+        delta_x = (((-1) ** n) / factorial(2 * n + 1)) * (x ** (2 * n + 1))
+        sin_x += delta_x
+        if abs(delta_x) < DELTA:
+            break
+        n += 1
+    return sin_x
